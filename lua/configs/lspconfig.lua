@@ -1,6 +1,20 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls" }
-vim.lsp.enable(servers)
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
 
--- read :h vim.lsp.config for changing options of lsp servers 
+local servers = { "html", "cssls", "lua_ls" }
+vim.lsp.enable(servers)
